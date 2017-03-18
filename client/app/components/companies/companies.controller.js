@@ -205,6 +205,7 @@ angular.module(app.name).controller('CompaniesController', function(
         var id = dataItem?dataItem.id:0;
 
         var dataItemCopy = {};
+        console.log('Start edit:',dataItem);
         if (dataItem) for (var key1 in dataItem.defaults) dataItemCopy[key1] = dataItem[key1];
 
         var options = {
@@ -233,7 +234,10 @@ angular.module(app.name).controller('CompaniesController', function(
                 for (var key1 in dataItemCopy)
                     if (dataItem[key1]!=dataItemCopy[key1]) dataItem.set(key1,dataItemCopy[key1]);
             }
+            console.log('End edit:',dataItem);
             // dataSource.sync();
+        }, function(res) {
+            console.log('Modal dismissed by: ',res);
         });
     };
 

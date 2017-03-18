@@ -49,7 +49,11 @@ Screenshots:
 ![Image of task 2c](screenshots/task2c.png)
 
 ## Reporting
-Please submit:
-
-(a) the archive with working code,
+Please submit:  
+(a) the archive with working code,  
 (b) the estimates for the time spent on completing each task.
+
+### Please note:
+1. Your job includes testing your own code and making sure that the final product is as close to being bug-free as possible.
+2. Delivering positive UX is essential to maintaining high-quality of the final product. Therefore, your modules have to strictly follow the design specs.  
+   If you have questions  and/or suggestions on UI or UX, please contact the technical lead for clarification.

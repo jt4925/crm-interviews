@@ -82,17 +82,7 @@ angular.module(app.name).controller('ContactsGridInlineController', function($sc
                                 options.error(response);
                             }
                         );
-                },
-                // update: function(options) {
-                //   options.success({});
-                // },
-                // create: function(options) {
-                //     options.success({});
-                // },
-                // destroy: function(options) {
-                //     options.success({});
-                // }
-            },
+                }            },
             serverSorting: false,
             schema: {
                 data: "list",
@@ -282,18 +272,8 @@ angular.module(app.name).controller('ContactsGridInlineController', function($sc
             // Remove id field from new rows
             if (rows[i].id<1) delete rows[i].id;
         }
-        $scope.$emit("ContactsSaved", {existing:rows,deleted:vm.grid.dataSource._destroyed});
+        return {existing:rows,deleted:vm.grid.dataSource._destroyed};
     };
-
-    // $scope.$on('CanSave', function(e) {
-    //     console.log('CanSave');
-    //     $scope.$emit("ContactsAllowSave", vm.isContactsBeingEdited());
-    // });
-
-    // $scope.$on('SaveContacts', function(e,data) {
-    //     console.log('SaveContacts',data);
-    //     $scope.$emit("ContactsSaved", vm.apply(data));
-    // });
 
     //------------------------------------------------------------------------------------------------------------------------------------
     //HELPERS

@@ -66,7 +66,6 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
             $('#Collapse2').collapse('show');
         }
     };
-    console.log(vm.next1);
 
 
     // Initiate saving process: send the msg to [Contacts]
@@ -79,67 +78,54 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
         vm.dataItem.statusLabel = vm.companyStatuses.find(function (o) { return o.code == vm.dataItem.statusCode; }).name;
         if (vm.dataItem.id>0) {
             $http.post('/api/companies/' + vm.dataItem.id, vm.dataItem)
-                .then(
-                    // success
-                    function (response) {
-                        console.log('updated', response);
-                        // $scope.$broadcast('SaveContacts', response.data);
-                        vm.contactsAPI.apply(response.data);
-                    },
-                    // error
-                    function (response) {
-                        // TODO show error
-                    });
+                .then( // success
+                    function (response) { vm.saveContacts(response); },
+                       // error
+                    function (response) { /* TODO show error */ }); 
         } else {
             delete vm.dataItem.id;
             $http.put('/api/companies', vm.dataItem)
-                .then(
-                    // success
-                    function (response) {
-                        console.log('inserted', response);
-                        // $scope.$broadcast('SaveContacts', response.data);
-                        vm.contactsAPI.apply(response.data);
-                    },
-                    // error
-                    function (response) {
-                        // TODO show error
-                    });
+                .then( // success
+                    function (response) { vm.saveContacts(response); },
+                       // error
+                    function (response) { /* TODO show error */ });
         }
     };
+    
+    vm.saveContacts = function (response) {
+        // update the variables from the server
+        for (var key in response.data) vm.dataItem[key] = response.data[key];
+        var contacts = vm.contactsAPI.apply(response.data);
 
-    vm.cancel = function() {
-        // $state.go('Companies');
-        $uibModalInstance.close(false);
-    };
-
-
-    //------------------------------------------------------------------------------------------------------------------------------------
-    //EVENTS
-    //------------------------------------------------------------------------------------------------------------------------------------
-
-    // Finish saving process after the contacts are saved
-    $scope.$on('ContactsSaved', function(e,contacts) {
-        console.log('[Company] got the msg from [contacts]',e);
-        console.log(contacts);
         // skip saving if there are no contacts
         if (contacts.existing.length==0 && contacts.deleted.length==0) {
             $uibModalInstance.close(true);
             return;
         }
 
+        // Save the contacts
         $http.post('/api/contacts/batch', contacts)
             .then(
                 // success
                 function(response) {
                     console.log('batch insert complete',response);
-                    // $state.go('Companies');
                     $uibModalInstance.close(true);
                 },
                 // error
                 function(response) {
                     // TODO show error
                 });
-    });
+    };
+
+
+    // Cancel button click
+    vm.cancel = function() {
+        $uibModalInstance.close(false);
+    };
+    
+    //------------------------------------------------------------------------------------------------------------------------------------
+    //EVENTS
+    //------------------------------------------------------------------------------------------------------------------------------------
 
     // Accordion toggle event
     $timeout(function(){
