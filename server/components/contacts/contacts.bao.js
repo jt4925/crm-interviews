@@ -8,6 +8,7 @@ module.exports = function(app) {
 
     module.get = function(query, cb) {
         var k = kendoUtils.prepareKendoQueryParams(query);
+        
         contactsDao.count(k.query, function(err, count) {
             if (err) {
                 cb(err);
@@ -40,6 +41,8 @@ module.exports = function(app) {
 
     module.update = function(id, row, cb) {
         if (Number(id)) {
+            // @bug
+            // what if id is valid number but does not exists?
             contactsDao.update(Number(id), row, cb);
         } else {
             cb("No id given");
@@ -47,6 +50,7 @@ module.exports = function(app) {
     };
 
     module.updatebatch = function(rows, cb) {
+        // @bug
         if ( rows && Array.isArray(rows.existing) && Array.isArray(rows.deleted)  ) {
             contactsDao.updatebatch(rows, cb);
         } else {

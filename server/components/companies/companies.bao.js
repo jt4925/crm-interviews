@@ -48,7 +48,7 @@ module.exports = function(app) {
         }
       });
     };
-    
+
     module.getDetails = function(id, cb) {
         if (Number(id)) {
             companiesDao.getDetails(Number(id), cb);
@@ -90,6 +90,7 @@ module.exports = function(app) {
     };
 
     module.indexOf = function(id, cb) {
+        // @bug
         if (id>0) {
             companiesDao.indexOf(id, cb);
         } else {

@@ -10,7 +10,7 @@
         <div class="col-lg-4">
             <div class="form-group">
                 <label>Name*:</label>
-                <input type="text" ng-model="vm.data.name" name="name" class="form-control" required>
+                <input type="text" ng-model="vm.data.name" ng-pattern="/^[a-zA-Z0-9]*$/" name="name" class="form-control" required>
                 <div class="help-block" ng-messages="vm.form.name.$error" ng-if="vm.form.name.$dirty || vm.form.$submitted">
                     <p ng-message="required">Required</p>
                 </div>
@@ -19,7 +19,10 @@
         <div class="col-lg-4">
             <div class="form-group">
                 <label>City:</label>
-                <input type="text" ng-model="vm.data.city" name="city" class="form-control">
+                <input type="text" ng-model="vm.data.city" ng-pattern="/^[a-zA-Z0-9]*$/" name="city" class="form-control" required="true">
+                <div class="help-block" ng-messages="vm.form.name.$error" ng-if="vm.form.name.$dirty || vm.form.$submitted">
+                    <p ng-message="required">Required</p>
+                </div>
             </div>
         </div>
         <div class="col-lg-4">

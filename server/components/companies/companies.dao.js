@@ -2,7 +2,7 @@ var _ = require("underscore");
 
 module.exports = function(db) {
     var module = {};
-    
+
     module.count = function(query, cb) {
         var q = query || {};
         var options = {};
@@ -31,7 +31,7 @@ module.exports = function(db) {
             cb(err, result);
         });
     };
-    
+
     module.getDetails = function(id, cb) {
         db.company_details.findOne({id: id}, function(err, result) {
             cb(err, result);
@@ -67,6 +67,8 @@ module.exports = function(db) {
     };
 
     module.indexOf = function(id, cb) {
+        // @bug
+        // prone to sql inject
         db.run("SELECT s.rnum FROM (SELECT id,row_number() OVER () as rnum  FROM public.companies ORDER BY id ASC) s WHERE id="+id, function(err, result) {
             cb(err, result);
         });

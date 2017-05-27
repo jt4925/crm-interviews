@@ -14,7 +14,6 @@ module.exports = function(app) {
     });
     //get all 
     app.get('/api/contacts/find', function (req, res, next) {
-        console.log(req.query)
         contacts.findAll(req.query,function (err, result) {
             if (err) return next(err);
             res.json(result);

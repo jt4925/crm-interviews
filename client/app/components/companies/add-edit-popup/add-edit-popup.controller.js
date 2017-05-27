@@ -1,7 +1,14 @@
 'use strict';
 
-angular.module(app.name).controller('CompaniesAddEditPopupController', function(
-    $scope, $http, $timeout, CompanyStatuses, ConfirmPopupModal, $uibModalInstance, options) {
+angular.module(app.name).controller(
+    'CompaniesAddEditPopupController', function(
+        $scope, 
+        $http, 
+        $timeout, 
+        CompanyStatuses, 
+        ConfirmPopupModal, 
+        $uibModalInstance, 
+        options) {
     var vm = this;
 
     vm.dataItem = options.dataItem;
@@ -23,7 +30,12 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
     vm.collapse1 = 'active';
     vm.collapse2 = 'notvisited';
     vm.collapse2visit = false;
-    vm.collapseClasses = {active: 'c-step-active', visited:'c-step-visited', notvisited: 'c-step-not-visited'};
+    vm.collapseClasses = {
+        active: 'current', 
+        visited:'done', 
+        notvisited: 'collapsed'
+    };
+
 
     vm.loadCompanyData = function() {
         $http.get("/api/companies/"+vm.dataItem.id)
@@ -55,7 +67,10 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
 
     // Go to the next section
     vm.next1 = function() {
-        angular.forEach(vm.companyForm.$error.required, function(field) { field.$setDirty(); });
+        angular.forEach(
+            vm.companyForm.$error.required, function(field) {
+                field.$setDirty(); 
+            });
         vm.companyForm.$setSubmitted();
         if (vm.companyForm.$valid) {
             vm.SubmitClick = true;
@@ -81,7 +96,7 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
                 .then( // success
                     function (response) { vm.saveContacts(response); },
                        // error
-                    function (response) { /* TODO show error */ }); 
+                    function (response) { /* TODO show error */ });
         } else {
             delete vm.dataItem.id;
             $http.put('/api/companies', vm.dataItem)
@@ -91,18 +106,15 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
                     function (response) { /* TODO show error */ });
         }
     };
-    
     vm.saveContacts = function (response) {
         // update the variables from the server
         for (var key in response.data) vm.dataItem[key] = response.data[key];
         var contacts = vm.contactsAPI.apply(response.data);
-
         // skip saving if there are no contacts
         if (contacts.existing.length==0 && contacts.deleted.length==0) {
             $uibModalInstance.close(true);
             return;
         }
-
         // Save the contacts
         $http.post('/api/contacts/batch', contacts)
             .then(
@@ -116,13 +128,11 @@ angular.module(app.name).controller('CompaniesAddEditPopupController', function(
                     // TODO show error
                 });
     };
-
-
     // Cancel button click
     vm.cancel = function() {
         $uibModalInstance.close(false);
     };
-    
+
     //------------------------------------------------------------------------------------------------------------------------------------
     //EVENTS
     //------------------------------------------------------------------------------------------------------------------------------------

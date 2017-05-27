@@ -7,7 +7,8 @@ This repository consists of both the node.js backend `/server/*` and Angular.js 
 
 * Node.js: v6.10 or higher
 * Global installation of npm, bower, grunt
-
+	* install bower with the command `npm install grunt -g` in linux `sudo npm install grunt -g`.
+	* install grunt with the command `npm install grunt -g` in linux `sudo npm install grunt -g`.
 ## Installation instructions
 
 ```bash
