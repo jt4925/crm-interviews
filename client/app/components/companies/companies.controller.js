@@ -88,7 +88,7 @@ angular.module(app.name).controller('CompaniesController', function(
                         },
                         statusReasonCode: {
                             type: "string"
-                        },						
+                        },
                     }
                 }
             },
@@ -188,10 +188,8 @@ angular.module(app.name).controller('CompaniesController', function(
             command: [{
                 name: "deleteRecord",
                 text: "",
-                template: '<button type="button" ng-click="deleteClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-remove"></button>',
-
+                template: '<button type="button" ng-click="editClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-pencil"></button> &nbsp; <button type="button" ng-click="deleteClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-remove"></button>',
             }]
-
         }]
     };
 
@@ -276,7 +274,7 @@ angular.module(app.name).controller('CompaniesController', function(
 
     //------------------------------------------------------------------------------------------------------------------------------------
     //HELPERS
-    //------------------------------------------------------------------------------------------------------------------------------------	
+    //------------------------------------------------------------------------------------------------------------------------------------
     $scope.refreshGrid = function() {
         $(".k-pager-refresh").trigger('click');
     }

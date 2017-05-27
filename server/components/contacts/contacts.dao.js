@@ -47,7 +47,12 @@ module.exports = function(db) {
             cb(err, result);
         });
     };
-
+    /**
+     * needs docu
+     * @param id
+     * @param row
+     * @param cb
+     */
     module.update = function(id, row, cb) {
         row.id = id;
         delete row.statusLabel;

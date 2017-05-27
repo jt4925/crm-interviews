@@ -114,7 +114,6 @@ p[ng-message] {
     padding-top: 5px;
     padding-bottom: 5px;
     color: #fff;
-    margin-right: 10px;
 }
 
 .c-step-visited {
@@ -126,7 +125,6 @@ p[ng-message] {
     padding-top: 5px;
     padding-bottom: 5px;
     color: #fff;
-    margin-right: 10px;
 }
 
 .c-step-not-visited {
@@ -138,7 +136,6 @@ p[ng-message] {
     padding-top: 5px;
     padding-bottom: 5px;
     color: #fff;
-    margin-right: 10px;
 }
 
 .c-grid-title {
