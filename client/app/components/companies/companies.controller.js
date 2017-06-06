@@ -188,7 +188,7 @@ angular.module(app.name).controller('CompaniesController', function(
             command: [{
                 name: "deleteRecord",
                 text: "",
-                template: '<button type="button" ng-click="deleteClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-remove"></button>',
+                template: '<button type="button" ng-click="editClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-pencil"></button><button type="button" ng-click="deleteClick(dataItem)" class="btn btn-pure btn-default icon s-btn-grid-action glyphicon glyphicon-remove"></button>',
 
             }]
 

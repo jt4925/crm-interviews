@@ -23,5 +23,11 @@
     "grunt-wiredep": "~1.8.0",
     "jit-grunt": "^0.5.0"
   },
-  "public": true
+  "public": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "Synergy 360 CRM (Interview) ===========================",
+  "author": "",
+  "license": "ISC"
 }
